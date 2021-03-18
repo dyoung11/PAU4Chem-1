@@ -39,12 +39,12 @@ class TRI_Scraper:
 
 
     def _Calling_TRI_columns(self):
-        Path_Columns = self._dir_path + '/../ancillary'
+        Path_columns=self._dir_path + '/../ancillary'
         for key in self._TRI_File_Columns_Dictionary.keys():
             inf_chardet = chardet.detect(open(Path_Columns + '/TRI_File_' + key + '_columns.txt', 'rb').read())
             inf_encoding = inf_chardet['encoding']
-            file_TRI_File_columns = codecs.open(Path_Columns + '/TRI_File_' + key + '_columns.txt', 'r', encoding = inf_encoding)
-            TRI_File_columns = [TRI_File_columns.rstrip().replace('\n','') for TRI_File_columns in file_TRI_File_columns.readlines()]
+            file_TRI_File_columns=codecs.open(Path_Columns + '/TRI_File_' + key + '_columns.txt', 'r', encoding = inf_encoding)
+            TRI_File_columns=[TRI_File_columns.rstrip().replace('\n','') for TRI_File_columns in file_TRI_File_columns.readlines()]
             self._TRI_File_Columns_Dictionary[key] = TRI_File_columns
             file_TRI_File_columns.close()
 
@@ -63,13 +63,13 @@ class TRI_Scraper:
                             header = None, encoding = 'ISO-8859-1',
                             error_bad_lines = False,
                             sep = '\t',
-                            low_memory = False,
+                            low_memory=False,
                             skiprows = [0],
                             lineterminator = '\n',
-                            usecols = range(len(self._TRI_File_Columns_Dictionary[key]))) # avoiding \r\n created in Windows OS
-            df.columns = self._TRI_File_Columns_Dictionary[key]
+                            usecols=range(len(self._TRI_File_Columns_Dictionary[key]))) # avoiding \r\n created in Windows OS
+            df.columns=self._TRI_File_Columns_Dictionary[key]
             df.to_csv(self._dir_path + '/datasets/US_' + key + '_' + self.year + '.csv',
-                        sep = ',', index = False)
+                        sep = ',', index=False)
             time.sleep(30)
             os.remove(self._dir_path + '/datasets/US_' + key + '_' + self.year + '.txt')
 

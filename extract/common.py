@@ -12,6 +12,6 @@ __config = None
 def config():
     global __config
     if not __config:
-        with open(dir_path + '/config.yaml', mode = 'r') as f:
+        with open(dir_path + '/config.yaml', mode='r') as f:
             __config = yaml.load(f, Loader=yaml.FullLoader)
     return __config
